@@ -54,3 +54,10 @@ even though the former sorts before the latter.  That is consistent with
 - `LooseVersion(version: str)` — wrapper with `<`, `<=`, `==`, `>=`, `>`,
   `!=`, and `hash`.  Exposes `.version` (original string) and `.tokens`
   (tuple of parsed tokens).
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
